@@ -46,7 +46,7 @@ void Shader::AddShader(GLuint* ShaderProgram, const char* pShaderText, GLenum Sh
     glAttachShader(*ShaderProgram, ShaderObj);
 }
 
-void Shader::CompileShaders(GLuint* gScaleLocation){
+void Shader::CompileShaders(){
     GLuint ShaderProgram = glCreateProgram();
 
     if(ShaderProgram == 0){
@@ -89,7 +89,4 @@ void Shader::CompileShaders(GLuint* gScaleLocation){
     }
 
     glUseProgram(ShaderProgram);
-
-    *gScaleLocation = glGetUniformLocation(ShaderProgram, "gScale");
-    assert(*gScaleLocation != 0xFFFFFFFF);
 }

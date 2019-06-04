@@ -4,7 +4,6 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
-#include <assert.h>
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
 #include "math_3d.h"
@@ -14,7 +13,7 @@ class Renderer{
         void InitSDL(const char* Name, int xpos, int ypos, int width, int height, bool enableVsync);
         void InitGlew();
         void CreateVertexBuffer();
-        void RenderScene(GLuint* gScaleLocation);
+        void RenderScene();
         void CleanupSDL();
 
     private:

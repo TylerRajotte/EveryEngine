@@ -5,7 +5,7 @@
 
 class Shader{
     public:
-        void CompileShaders(GLuint* gScaleLocation);
+        void CompileShaders();
         bool ReadFile(const char* pFileName, std::string& outFile);
         void AddShader(GLuint* ShaderProgram, const char* pShaderText, GLenum ShaderType);
     private:
