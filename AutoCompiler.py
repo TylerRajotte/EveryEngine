@@ -3,7 +3,7 @@
 import os
 
 # Settings
-outputname = "EveryEngine"
+outputname = "EveryEngineExecutable"
 sourceCodeDirectory = "Source/"
 flags = "-w"
 linkerflags = "-lGL -lSDL2 -lGLEW"
