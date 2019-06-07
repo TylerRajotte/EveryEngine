@@ -1,9 +1,9 @@
-#ifndef Renderer_H
-#define Renderer_H
+#ifndef WindowManager_H
+#define WindowManager_H
 
 #include "../dependancies.h"
 
-class Renderer{
+class WindowManager{
     public:
         void InitSDL(const char* Name, int xpos, int ypos, int width, int height, bool enableVsync);
         void InitGlew();

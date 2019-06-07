@@ -1,6 +1,6 @@
-#include "renderer.h"
+#include "windowmanager.h"
 
-void Renderer::InitSDL(const char* name, int xpos, int ypos, int width, int height, bool enableVsync){
+void WindowManager::InitSDL(const char* name, int xpos, int ypos, int width, int height, bool enableVsync){
     if (SDL_Init(SDL_INIT_VIDEO) < 0){
         std::cout << "Failed to Init SDL2" << std::endl;
     }
@@ -27,14 +27,14 @@ void Renderer::InitSDL(const char* name, int xpos, int ypos, int width, int heig
     
 }
 
-void Renderer::InitGlew(){
+void WindowManager::InitGlew(){
     GLenum res = glewInit();
     if(res != GLEW_OK){
         std::cout << stderr << " GLEW init Error: " << glewGetErrorString(res) << std::endl;
     }
 }
 
-void Renderer::RenderScene(){
+void WindowManager::RenderScene(){
     glClear(GL_COLOR_BUFFER_BIT);
 
     glEnableVertexAttribArray(0);
@@ -46,7 +46,7 @@ void Renderer::RenderScene(){
     SDL_GL_SwapWindow(MainWindow);
 }
 
-void Renderer::CreateVertexBuffer(){
+void WindowManager::CreateVertexBuffer(){
     Vector3f Vertices[3];
     Vertices[0] = Vector3f(-1.0f, -1.0f, 0.0f);
     Vertices[1] = Vector3f(1.0f, -1.0f, 0.0f);
@@ -58,7 +58,7 @@ void Renderer::CreateVertexBuffer(){
 
 }
 
-void Renderer::CleanupSDL(){
+void WindowManager::CleanupSDL(){
     SDL_GL_DeleteContext(MainContext);
     SDL_DestroyWindow(MainWindow);
     SDL_Quit();

@@ -1,6 +1,6 @@
 #include "gameobject.h"
 
-void GameObject::SetAttribute(int Attribute, int NewValue[3]){
+void GameObject::SetArrayAttribute(int Attribute, int NewValue[3]){
     switch(Attribute){
         case 0:
             for(int i = 0; i < 3; i++){
@@ -32,7 +32,7 @@ void GameObject::SetAttribute(int Attribute, int NewValue[3]){
     }
 }
 
-int* GameObject::GetAttribute(int Attribute){
+int* GameObject::GetArrayAttribute(int Attribute){
     switch(Attribute){
         case 0:
             return Pos;
@@ -54,4 +54,18 @@ int* GameObject::GetAttribute(int Attribute){
             std::cout << stderr << "Error Invaild Attribute" << std::endl;
             break;
     }
+}
+
+void GameObject::SetName(std::string NewName){
+    Name = NewName;
+}
+std::string GameObject::GetName(){
+    return Name;
+}
+
+void GameObject::SetID(int NewId){
+    ID = NewId;
+}
+int GameObject::GetID(){
+    return ID;
 }

@@ -1,5 +1,5 @@
 #include "dependancies.h"
-#include "Render/renderer.h"
+#include "Render/windowmanager.h"
 #include "Render/shader.h"
 #include "event.h"
 #include "gameobject.h"
@@ -60,13 +60,13 @@
 
 
 Shader* shader = nullptr;
-Renderer* renderer = nullptr;
+WindowManager* windowmanager = nullptr;
 Event* event = nullptr;
 GameObject* gameobject = nullptr;
 
 int main(int argc, char** argv){
     shader = new Shader();
-    renderer = new Renderer();
+    windowmanager = new WindowManager();
     event = new Event();
     gameobject = new GameObject();
 
@@ -81,20 +81,20 @@ int main(int argc, char** argv){
     // }
     // std::cout << "The Output for the index 1 is - " << output[1] << std::endl;
 
-    renderer->InitSDL("EveryEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, false);
-    renderer->InitGlew();
+    windowmanager->InitSDL("EveryEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, false);
+    windowmanager->InitGlew();
 
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-    renderer->CreateVertexBuffer();
+    windowmanager->CreateVertexBuffer();
     shader->CompileShaders();
 
     bool running = true;
     while(running){
         event->EventPoll(&running);
-        renderer->RenderScene();
+        windowmanager->RenderScene();
     }
-    renderer->CleanupSDL();
+    windowmanager->CleanupSDL();
 
     return 0;
 }
