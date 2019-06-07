@@ -2,6 +2,10 @@
 #include "shader.h"
 #include "event.h"
 
+// General Assumtions
+//      Open World with enough terrain that it will be loaded in and out
+//      Maybe computer generated terrain
+
 // Todo
 //     I think I should work toward removing the math3d dependancy
 //     Reimplement all the code regarding VBO and add VAO
@@ -14,6 +18,44 @@
 //     Above advocates for a really abstracted front end/functions to work with things 
 //     I Also like the idea of using small programs like the vertex shader to controll functionality like sound or behaviour
 //     Settings File Functionality and actually making it work
+
+// Basic Idea 1:
+//     GameObject
+//          POS(X, Y, Z)
+//          Scale(x, y, z)
+//          Rotation(x, y, z) + Rotation Point (x, y, z)
+//          DisplayName
+//          ID
+//          Action Object (Based on the Action Object) Action Objects should be independant of Gameobject
+//      Render Object
+//          Model
+//          Texture
+//          Fracture Shader
+//          Vertex Shader
+//      Action Object
+//          AI
+//          Sounds
+//          Interactivity
+//
+// Basic Idea 2:
+//     GameObject
+//          POS(X, Y, Z)
+//          Scale(x, y, z)
+//          Rotation(x, y, z) + Rotation Point (x, y, z)
+//          DisplayName
+//          ID
+//          AI
+//          Sounds
+//          Interactivity
+//      Render Object
+//          Model
+//          Texture
+//          Fracture Shader
+//          Vertex Shader
+//
+// GameObjects Should be the building blocks of everything
+//      Houses, Items, Props, Player
+
 
 Shader* shader = nullptr;
 Renderer* renderer = nullptr;
