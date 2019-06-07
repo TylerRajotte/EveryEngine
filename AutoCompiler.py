@@ -4,12 +4,13 @@ import os
 
 # Settings
 outputname = "EveryEngine"
+sourceCodeDirectory = "Source/"
 flags = "-w"
 linkerflags = "-lGL -lSDL2 -lGLEW"
 runAfterCompile = True
 compiler = "g++"
-#compiler = "x86_64-w64-mingw32-g++"
 
+# Build Counter
 currentbuildcount = 0
 
 if not(os.path.isfile("BuildCount.txt")):
@@ -31,19 +32,22 @@ except OSError:
     print("Could not clean old compiled code")
 outputname = outputname + "-" + str(currentbuildcount)
 
+# New Walk powered source code finder
 filestocompile = ""
-directory = os.listdir(".")
+for root, dirs, files in os.walk(sourceCodeDirectory, topdown=False):
+    for file in files:
+        cleanedname = None
+        if root[-1] != "/":
+            cleanedname = root + "/" + file
+        else:
+            cleanedname = root + file
 
-for file in directory:
-    try:
-        if file.split(".")[1] == "cpp" or file.split(".")[1] == "h":
-            filestocompile += file + " "
-    except IndexError:
-        continue
+        if cleanedname.split(".")[1] == "cpp" or cleanedname.split(".")[1] == "h":
+            filestocompile += cleanedname + " "
 
-# print("g++ {}{} {} -o {}".format(filestocompile, flags, linkerflags, outputname))
+# print("{} {}{} {} -o {}".format(compiler, filestocompile, flags, linkerflags, outputname))
 # print("./" + outputname)
 
-# os.system("{} {}{} {} -o {}".format(compiler, filestocompile, flags, linkerflags, outputname))
+os.system("{} {}{} {} -o {}".format(compiler, filestocompile, flags, linkerflags, outputname))
 if runAfterCompile:
     os.system("./" + outputname)
