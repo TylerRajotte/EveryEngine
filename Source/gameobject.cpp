@@ -1,41 +1,57 @@
 #include "gameobject.h"
 
-// Might make sense to change these out for a update attribute function than many of these
-// Yeah after having a second look that would probably be the better idea in the long run
+void GameObject::SetAttribute(int Attribute, int NewValue[3]){
+    switch(Attribute){
+        case 0:
+            for(int i = 0; i < 3; i++){
+                Pos[i] = NewValue[i];
+            }
+            break;
 
-void GameObject::SetPos(int NewPos[3]){
-    for(int i = 0; i < 3; i++){
-        Pos[i] = NewPos[i];
+        case 1:
+            for(int i = 0; i < 3; i++){
+                Scale[i] = NewValue[i];
+            }
+            break;
+
+        case 2:
+            for(int i = 0; i < 3; i++){
+                Rotation[i] = NewValue[i];
+            }
+            break;
+
+        case 3:
+            for(int i = 0; i < 3; i++){
+                RotationOrigin[i] = NewValue[i];
+            }
+            break;
+        
+        default:
+            std::cout << stderr << "Error Invaild Attribute" << std::endl;
+            break;
     }
 }
-int* GameObject::GetPos(){
-    return Pos;
-}
 
-void GameObject::SetScale(int NewScale[3]){
-    for(int i = 0; i < 3; i++){
-        Scale[i] = NewScale[i];
+int* GameObject::GetAttribute(int Attribute){
+    switch(Attribute){
+        case 0:
+            return Pos;
+            break;
+
+        case 1:
+            return Scale;
+            break;
+
+        case 2:
+            return Rotation;
+            break;
+
+        case 3:
+            return RotationOrigin;
+            break;
+        
+        default:
+            std::cout << stderr << "Error Invaild Attribute" << std::endl;
+            break;
     }
-}
-int* GameObject::GetScale(){
-    return Scale;
-}
-
-void GameObject::SetRot(int NewRot[3]){
-    for(int i = 0; i < 3; i++){
-        Rotation[i] = NewRot[i];
-    }
-}
-
-int* GameObject::GetRot(){
-    return Rotation;
-}
-
-void GameObject::SetRotOrigin(int NewRotOrigin[3]){
-    for(int i = 0; i < 3; i++){
-        RotationOrigin[i] = NewRotOrigin[i];
-    }
-}
-int* GameObject::GetRotOrigin(){
-    return RotationOrigin;
 }
