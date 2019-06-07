@@ -1,7 +1,7 @@
 #ifndef Renderer_H
 #define Renderer_H
 
-#include "dependancies.h"
+#include "../dependancies.h"
 
 class Renderer{
     public:

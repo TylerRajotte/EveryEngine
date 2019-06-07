@@ -1,11 +1,11 @@
 #include "renderer.h"
 
-void Renderer::InitSDL(const char* Name, int xpos, int ypos, int width, int height, bool enableVsync){
+void Renderer::InitSDL(const char* name, int xpos, int ypos, int width, int height, bool enableVsync){
     if (SDL_Init(SDL_INIT_VIDEO) < 0){
         std::cout << "Failed to Init SDL2" << std::endl;
     }
 
-    MainWindow = SDL_CreateWindow(Name, xpos, ypos, width, height, SDL_WINDOW_OPENGL);
+    MainWindow = SDL_CreateWindow(name, xpos, ypos, width, height, SDL_WINDOW_OPENGL);
 
     if(!MainWindow){
         std::cout << "Unable To Create Window" << std::endl;

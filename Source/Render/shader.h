@@ -1,7 +1,7 @@
 #ifndef Shader_H
 #define Shader_H
 
-#include "dependancies.h"
+#include "../dependancies.h"
 
 class Shader{
     public:

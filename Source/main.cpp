@@ -2,6 +2,7 @@
 #include "Render/renderer.h"
 #include "Render/shader.h"
 #include "event.h"
+#include "gameobject.h"
 
 // General Assumtions
 //      Open World with enough terrain that it will be loaded in and out
@@ -61,11 +62,24 @@
 Shader* shader = nullptr;
 Renderer* renderer = nullptr;
 Event* event = nullptr;
+GameObject* gameobject = nullptr;
 
 int main(int argc, char** argv){
     shader = new Shader();
     renderer = new Renderer();
     event = new Event();
+    gameobject = new GameObject();
+
+    // Test Code for setting and retrieving gameobject data arrays
+
+    // int newpos[3] = {1, 2, 3};
+    // gameobject->SetPos(newpos);
+
+    // int output[3];
+    // for(int i = 0; i < 3; i++){
+    //     output[i] = gameobject->GetPos()[i];
+    // }
+    // std::cout << "The Output for the index 1 is - " << output[1] << std::endl;
 
     renderer->InitSDL("EveryEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, false);
     renderer->InitGlew();
