@@ -1,4 +1,4 @@
-#include "renderer.h"
+#include "../dependancies.h"
 #include "shader.h"
 
 bool Shader::ReadFile(const char* pFileName, std::string& outFile){
