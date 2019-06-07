@@ -69,7 +69,6 @@ void Shader::CompileShaders(){
     AddShader(&ShaderProgram, vs.c_str(), GL_VERTEX_SHADER);
     AddShader(&ShaderProgram, fs.c_str(), GL_FRAGMENT_SHADER);
 
-
     GLint Success = 0;
     GLchar ErrorLog[1024] = {0};
     glLinkProgram(ShaderProgram);

@@ -9,8 +9,8 @@ class Shader{
         bool ReadFile(const char* pFileName, std::string& outFile);
         void AddShader(GLuint* ShaderProgram, const char* pShaderText, GLenum ShaderType);
     private:
-        const char* pVSFileName = "shader.vs";
-        const char* pFSFileName = "shader.fs";
+        const char* pVSFileName = "Shaders/shader.vs";
+        const char* pFSFileName = "Shaders/shader.fs";
 };
 
 #endif
