@@ -2,7 +2,7 @@
 #include "Render/windowmanager.h"
 #include "Render/shader.h"
 #include "event.h"
-#include "gameobject.h"
+#include "Render/modelloader.h"
 
 // General Assumtions
 //      Open World with enough terrain that it will be loaded in and out
@@ -68,24 +68,19 @@
 Shader* shader = nullptr;
 WindowManager* windowmanager = nullptr;
 Event* event = nullptr;
-GameObject* gameobject = nullptr;
+ModelLoader* modelloader = nullptr;
 
 int main(int argc, char** argv){
     shader = new Shader();
     windowmanager = new WindowManager();
     event = new Event();
-    gameobject = new GameObject();
+    modelloader = new ModelLoader();
 
-    // Test Code for setting and retrieving gameobject data arrays
-
-    // int newpos[3] = {1, 2, 3};
-    // gameobject->SetPos(newpos);
-
-    // int output[3];
-    // for(int i = 0; i < 3; i++){
-    //     output[i] = gameobject->GetPos()[i];
-    // }
-    // std::cout << "The Output for the index 1 is - " << output[1] << std::endl;
+    if (modelloader->OpenModel(0)){
+        std::cout << "No Errors in ModelLoader" << std::endl;
+    } else {
+        return -1;
+    }
 
     windowmanager->InitSDL("EveryEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, false);
     windowmanager->InitGlew();
