@@ -20,6 +20,12 @@
 //     Above advocates for a really abstracted front end/functions to work with things 
 //     I Also like the idea of using small programs like the vertex shader to controll functionality like sound or behaviour
 //     Settings File Functionality and actually making it work
+//     
+
+// Maybe work on some form of a Object Manager for keeping track of all the various objects such as 
+// Game Objects and Render Objects or just GameObjects
+
+
 
 // Basic Idea 1:
 //     GameObject
