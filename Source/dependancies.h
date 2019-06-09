@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string.h>
 #include <sstream>
+#include <vector>
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
 #include "Render/math_3d.h"
@@ -17,6 +18,6 @@ const int GO_ID = 4;
 const int GO_NAME = 5;
 
 // Temp setting should eventually use Settings.txt
-const std::string GameObjectsLocation = "../GameObjects/";
+const std::string GameObjectsLocation = "GameObjects/";
 
 #endif

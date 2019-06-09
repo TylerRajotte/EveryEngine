@@ -1,7 +1,7 @@
 #include "../dependancies.h"
 #include "shader.h"
 
-bool Shader::ReadFile(const char* pFileName, std::string& outFile){
+bool Shader::ReadFile(const char* pFileName, std::string &outFile){
     std::ifstream f(pFileName);
     bool ret = false;
     if(f.is_open()){
@@ -13,7 +13,7 @@ bool Shader::ReadFile(const char* pFileName, std::string& outFile){
         f.close();
         ret = true;
     } else {
-        std::cout << stderr << pFileName << ": Unable to open file" << std::endl;
+        std::cout << stderr << " " << pFileName << ": Unable to open file" << std::endl;
     }
     return ret;
 }
@@ -57,12 +57,12 @@ void Shader::CompileShaders(){
     std::string vs, fs;
 
     if(!ReadFile(pVSFileName, vs)){
-        std::cout << " Error Reading File I think... this one is the vs shader file" << std::endl;
+        std::cout << stderr << " Error Reading Vertex Shader File" << std::endl;
         exit(1);
     }
 
     if(!ReadFile(pFSFileName, fs)){
-        std::cout << " Error Reading File I think... this one is the fs shader file" << std::endl;
+        std::cout << " Error Reading Fragment Shader File" << std::endl;
         exit(1);
     }
 

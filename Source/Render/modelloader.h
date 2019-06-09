@@ -4,11 +4,12 @@
 class ModelLoader{
     public:
         bool OpenModel(int ID);
+        int* ParseModelLine(std::string InputLine);
         int* GetVertices();
         int* GetIndices();
 
     private:
-        int* VerticesPointer;
-        int* IndicesPointer;
+        std::vector<int*> VerticesVectorPointers;
+        std::vector<int*> IndicesVectorPointers;
 };
 #endif
