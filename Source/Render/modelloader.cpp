@@ -1,9 +1,12 @@
 #include "modelloader.h"
 #include "../dependancies.h"
 
-int* ModelLoader::ParseModelLine(std::string InputLine){
-    int final[3] = {0, 0, 0};
-    return final;
+std::array<int,3> ModelLoader::ParseModelLine(std::string Line){
+    
+
+
+    std::array<int, 3> finaloutput = {0, 0, 0};
+    return finaloutput;
 }
 
 bool ModelLoader::OpenModel(int ID){
@@ -22,23 +25,27 @@ bool ModelLoader::OpenModel(int ID){
         while(getline(ModelFile, CurrentLine)){
             // Switch for the first letter
             switch (CurrentLine.front()){
-                case 'v':
+                case 'v': {
                     // Add a vert
-                    int* FormatedVert = ParseModelLine(CurrentLine);
-                    VerticesVectorPointers.resize(VerticesVectorPointers.size() + 1);
-                    VerticesVectorPointers.push_back(FormatedVert);
+                    std::array<int, 3> FormatedVert = ParseModelLine(CurrentLine);
+                    for(int i = 0; i < 2; i++){
+                        Vertices.push_back(FormatedVert[i]);
+                    }
                     std::cout << "Loaded Vertex - " << CurrentLine << std::endl;
                     break;
-                case 'f':
+                }
+                case 'f': {
                     // Add a Face
-                    int* FormatedIndices = ParseModelLine(CurrentLine);
-                    IndicesVectorPointers.resize(IndicesVectorPointers.size() + 1);
-                    IndicesVectorPointers.push_back(FormatedIndices);
-                    std::cout << "Loaded Indices - " << CurrentLine << std::endl;
-                    break;
-                default:
+                    std::array<int, 3> FormatedIndices = ParseModelLine(CurrentLine);
+                    for(int i = 0; i < 2; i++){
+                        Indices.push_back(FormatedIndices[i]);
+                    }
+                    std::cout << "Loaded Indice - " << CurrentLine << std::endl;
+                }
+                default: {
                     // Something else doesn't matter though
                     break;
+                }
             }
         }  
     } else {

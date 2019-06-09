@@ -6,6 +6,7 @@
 #include <string.h>
 #include <sstream>
 #include <vector>
+#include <array>
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
 #include "Render/math_3d.h"

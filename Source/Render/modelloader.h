@@ -1,15 +1,17 @@
 #ifndef ModelLoader_H
 #define ModelLoader_H
 
+#include "../dependancies.h"
+
 class ModelLoader{
     public:
         bool OpenModel(int ID);
-        int* ParseModelLine(std::string InputLine);
+        std::array<int,3> ParseModelLine(std::string Line);
         int* GetVertices();
         int* GetIndices();
 
     private:
-        std::vector<int*> VerticesVectorPointers;
-        std::vector<int*> IndicesVectorPointers;
+        std::vector<int> Vertices;
+        std::vector<int> Indices;
 };
 #endif
