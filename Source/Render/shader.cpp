@@ -1,8 +1,8 @@
 #include "../dependancies.h"
 #include "shader.h"
 
-bool Shader::ReadFile(const char* pFileName, std::string &outFile){
-    std::ifstream f(pFileName);
+bool Shader::ReadFile(std::string pFileName, std::string &outFile){
+    std::ifstream f(pFileName.c_str());
     bool ret = false;
     if(f.is_open()){
         std::string line;
@@ -46,7 +46,12 @@ void Shader::AddShader(GLuint* ShaderProgram, const char* pShaderText, GLenum Sh
     glAttachShader(*ShaderProgram, ShaderObj);
 }
 
-void Shader::CompileShaders(){
+GLuint Shader::CompileShaders(int ID){
+    std::stringstream IDAsStringStream;
+    IDAsStringStream << ID;
+    std::string VertexShaderLocation = GameObjectsLocation + IDAsStringStream.str() + "/vertex.vs";
+    std::string FractureShaderLocation = GameObjectsLocation + IDAsStringStream.str() + "/fracture.fs";
+
     GLuint ShaderProgram = glCreateProgram();
 
     if(ShaderProgram == 0){
@@ -56,12 +61,12 @@ void Shader::CompileShaders(){
 
     std::string vs, fs;
 
-    if(!ReadFile(pVSFileName, vs)){
+    if(!ReadFile(VertexShaderLocation, vs)){
         std::cout << stderr << " Error Reading Vertex Shader File" << std::endl;
         exit(1);
     }
 
-    if(!ReadFile(pFSFileName, fs)){
+    if(!ReadFile(FractureShaderLocation, fs)){
         std::cout << " Error Reading Fragment Shader File" << std::endl;
         exit(1);
     }
@@ -87,5 +92,6 @@ void Shader::CompileShaders(){
         exit(1);
     }
 
-    glUseProgram(ShaderProgram);
+    std::cout << "Successfully compiled shaders for Game Object " << ID << std::endl;
+    return ShaderProgram;
 }

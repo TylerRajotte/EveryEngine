@@ -11,8 +11,6 @@
 // Todo
 //     I think I should work toward removing the math3d dependancy
 //     Reimplement all the code regarding VBO and add VAO
-//     Shader Code should more or less stay the same but the frontend should change
-//          Should return a pointer to the location of the compiled shader program
 //     Revamp the total front end for interacting with the renderer 
 //         Should be as simple as possible working with the front end 
 //         Maybe specify your shaders and model and the renderer takes care of the rest
@@ -76,7 +74,7 @@ int main(int argc, char** argv){
     event = new Event();
     modelloader = new ModelLoader();
 
-    if (modelloader->OpenModel(1)){
+    if (modelloader->OpenModel(0)){
         std::cout << "No Errors in ModelLoader" << std::endl;
     } else {
         return -1;
@@ -88,7 +86,8 @@ int main(int argc, char** argv){
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
     windowmanager->CreateVertexBuffer();
-    shader->CompileShaders();
+
+    glUseProgram(shader->CompileShaders(0));
 
     bool running = true;
     while(running){
