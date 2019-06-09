@@ -76,7 +76,7 @@ int main(int argc, char** argv){
     event = new Event();
     modelloader = new ModelLoader();
 
-    if (modelloader->OpenModel(0)){
+    if (modelloader->OpenModel(1)){
         std::cout << "No Errors in ModelLoader" << std::endl;
     } else {
         return -1;
