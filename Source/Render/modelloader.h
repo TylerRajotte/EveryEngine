@@ -7,8 +7,8 @@ class ModelLoader{
     public:
         bool OpenModel(int ID);
         std::array<float,3> ParseModelLine(std::string Line);
-        std::vector<float>* GetVertices();
-        std::vector<int>* GetIndices();
+        float* GetVertices();
+        unsigned int* GetIndices();
 
     private:
         std::vector<float> Vertices;

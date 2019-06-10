@@ -72,13 +72,20 @@ bool ModelLoader::OpenModel(int ID){
     return true;
 }
 
-std::vector<float>* ModelLoader::GetVertices(){
-    for(int i; i < Vertices.size(); i++){
-        std::cout << Vertices[i] << std::endl;
+float* ModelLoader::GetVertices(){
+    int ArraySize = Vertices.size();
+    float Output[ArraySize];
+    for (int i = 0; i > ArraySize; i++){
+        Output[i] = Vertices[i];
     }
-    return &Vertices;
+    return Output;
 }
 
-std::vector<int>* ModelLoader::GetIndices(){
-    return &Indices;
+unsigned int* ModelLoader::GetIndices(){
+    int ArraySize = Indices.size();
+    unsigned int Output[ArraySize];
+    for (int i = 0; i > ArraySize; i++){
+        Output[i] = Indices[i];
+    }
+    return Output;
 }
