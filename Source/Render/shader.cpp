@@ -2,11 +2,16 @@
 #include "shader.h"
 
 bool Shader::ReadFile(std::string pFileName, std::string &outFile){
+    // Opening the file
     std::ifstream f(pFileName.c_str());
+    // Error checking variable
     bool ret = false;
+
+    // See if its actually open
     if(f.is_open()){
         std::string line;
         while(getline(f, line)){
+            // Appending lines to the outfile
             outFile.append(line);
             outFile.append("\n");
         }
@@ -18,12 +23,13 @@ bool Shader::ReadFile(std::string pFileName, std::string &outFile){
     return ret;
 }
 
-GLuint* Shader::AddShader(GLuint* ShaderProgram, const char* pShaderText, GLenum ShaderType){
-    GLuint ShaderObj = glCreateShader(ShaderType);
+bool Shader::AddShader(GLuint* ShaderProgram, const char* pShaderText, GLenum ShaderType, GLuint* ShaderObject){
+    // Parsing and getting the source code ready for being compiled
+    *ShaderObject = glCreateShader(ShaderType);
 
-    if(ShaderObj == 0){
+    if(*ShaderObject == 0){
         std::cout << stderr << " Error creating shader type" << ShaderType << std::endl;
-        exit(0);
+        return false;
     }
 
     const GLchar* p[1];
@@ -32,49 +38,65 @@ GLuint* Shader::AddShader(GLuint* ShaderProgram, const char* pShaderText, GLenum
     GLint Lengths[1];
     Lengths[0] = strlen(pShaderText);
 
-    glShaderSource(ShaderObj, 1, p, Lengths);
-    glCompileShader(ShaderObj);
+    // Compiling
+    glShaderSource(*ShaderObject, 1, p, Lengths);
+    glCompileShader(*ShaderObject);
 
+    // Error checking
     GLint success;
-    glGetShaderiv(ShaderObj, GL_COMPILE_STATUS, &success);
+    glGetShaderiv(*ShaderObject, GL_COMPILE_STATUS, &success);
     if(!success){
         GLchar InfoLog[1024];
-        glGetShaderInfoLog(ShaderObj, sizeof(InfoLog), NULL, InfoLog);
-        std::cout << stderr << " Error compiling shader type " << ShaderType << InfoLog << std::endl; 
+        glGetShaderInfoLog(*ShaderObject, sizeof(InfoLog), NULL, InfoLog);
+        std::cout << stderr << " Error compiling shader type " << ShaderType << InfoLog << std::endl;
+        return false; 
     }
 
-    glAttachShader(*ShaderProgram, ShaderObj);
-    return &ShaderObj;
+    // Attaching shader to the program
+    glAttachShader(*ShaderProgram, *ShaderObject);
+    return true;
 }
 
 bool Shader::CompileShaders(int ID){
+    // Inital directory to look for the shaders setup
     std::stringstream IDAsStringStream;
     IDAsStringStream << ID;
     std::string VertexShaderLocation = GameObjectsLocation + IDAsStringStream.str() + "/vertex.vs";
     std::string FractureShaderLocation = GameObjectsLocation + IDAsStringStream.str() + "/fracture.fs";
 
+    // Creating the shader program
     ShaderProgram = glCreateProgram();
-
     if(ShaderProgram == 0){
         std::cout << stderr << " Error creating shader program" << std::endl;
         return false;
     }
 
+    // Reading the files and error checking
     std::string vs, fs;
-
     if(!ReadFile(VertexShaderLocation, vs)){
         std::cout << stderr << " Error Reading Vertex Shader File" << std::endl;
         return false;
     }
-
     if(!ReadFile(FractureShaderLocation, fs)){
         std::cout << " Error Reading Fragment Shader File" << std::endl;
         return false;
     }
 
-    GLuint* VertexShader = AddShader(&ShaderProgram, vs.c_str(), GL_VERTEX_SHADER);
-    GLuint* FractureShader = AddShader(&ShaderProgram, fs.c_str(), GL_FRAGMENT_SHADER);
+    // Adding Shaders and error checking and if thats the case pushing the error up
+    if (AddShader(&ShaderProgram, vs.c_str(), GL_VERTEX_SHADER, &VertexShaderObject)){
+        std::cout << "Successfully added Vertex shader" << std::endl;
+    } else {
+        std::cout << stderr << " Error Adding Vertex shader" << std::endl;
+        return false;
+    }
+    if(AddShader(&ShaderProgram, fs.c_str(), GL_FRAGMENT_SHADER, &FractureShaderObject)){
+        std::cout << "Successfully added Vertex shader" << std::endl;
+    } else {
+        std::cout << stderr << " Error Adding Fragment shader" << std::endl;
+        return false;
+    }
 
+    // Compiling and linking and error checking
     GLint Success = 0;
     GLchar ErrorLog[1024] = {0};
     glLinkProgram(ShaderProgram);
@@ -93,7 +115,8 @@ bool Shader::CompileShaders(int ID){
         return false;
     }
 
-    glDeleteShader(*VertexShader);
-    glDeleteShader(*FractureShader);
+    // Cleanup
+    glDeleteShader(VertexShaderObject);
+    glDeleteShader(FractureShaderObject);
     return true;
 }

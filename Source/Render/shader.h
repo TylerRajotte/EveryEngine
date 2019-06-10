@@ -7,10 +7,11 @@ class Shader{
     public:
         bool CompileShaders(int ID);
         bool ReadFile(std::string pFileName, std::string& outFile);
-        GLuint* AddShader(GLuint* ShaderProgram, const char* pShaderText, GLenum ShaderType);
+        bool AddShader(GLuint* ShaderProgram, const char* pShaderText, GLenum ShaderType, GLuint* ShaderObject);
         GLuint ShaderProgram;
     private:
-
+        GLuint VertexShaderObject;
+        GLuint FractureShaderObject;
 };
 
 #endif
