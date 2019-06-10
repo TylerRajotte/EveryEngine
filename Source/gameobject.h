@@ -4,7 +4,8 @@
 
 class GameObject{
     public:
-        void Init(int ID, std::string Name, int Pos[3], int Scale[3], int Rotation[3], int RotationOrigin[3]);
+        bool Init(int NewID, std::string NewName, int NewPos[3], int NewScale[3], int NewRotation[3], int NewRotationOrigin[3]);
+        void RenderObject();
         // This function would then later be called by the object manager
         void Update();
 
@@ -24,6 +25,12 @@ class GameObject{
         int Scale[3];
         int Rotation[3];
         int RotationOrigin[3];
+
+        unsigned int VBO;
+        unsigned int EBO;
+        unsigned int VAO;
+
+        Shader* shader = nullptr;
 };
 
 #endif

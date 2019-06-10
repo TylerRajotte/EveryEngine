@@ -1,8 +1,7 @@
 #include "dependancies.h"
 #include "Render/windowmanager.h"
-#include "Render/shader.h"
+#include "gameobject.h"
 #include "event.h"
-#include "Render/modelloader.h"
 
 // General Assumtions
 //      Open World with enough terrain that it will be loaded in and out
@@ -62,37 +61,30 @@
 // GameObjects Should be the building blocks of everything
 //      Houses, Items, Props, Player
 
-
-Shader* shader = nullptr;
 WindowManager* windowmanager = nullptr;
 Event* event = nullptr;
-ModelLoader* modelloader = nullptr;
+GameObject* triangle = nullptr;
 
 int main(int argc, char** argv){
-    shader = new Shader();
     windowmanager = new WindowManager();
     event = new Event();
-    modelloader = new ModelLoader();
-
-    if (modelloader->OpenModel(0)){
-        std::cout << "No Errors in ModelLoader" << std::endl;
-    } else {
-        return -1;
-    }
+    triangle = new GameObject();
 
     windowmanager->InitSDL("EveryEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, false);
     windowmanager->InitGlew();
 
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-    windowmanager->CreateVertexBuffer();
+    int data[3] = {0,0,0};
 
-    glUseProgram(shader->CompileShaders(0));
+    triangle->Init(0, "Triangle", data, data, data, data);
 
     bool running = true;
     while(running){
         event->EventPoll(&running);
-        windowmanager->RenderScene();
+        windowmanager->CleanScreen();
+        triangle->RenderObject();
+        windowmanager->SwapWindow();
     }
     windowmanager->CleanupSDL();
 

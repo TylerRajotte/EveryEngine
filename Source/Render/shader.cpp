@@ -18,7 +18,7 @@ bool Shader::ReadFile(std::string pFileName, std::string &outFile){
     return ret;
 }
 
-void Shader::AddShader(GLuint* ShaderProgram, const char* pShaderText, GLenum ShaderType){
+GLuint* Shader::AddShader(GLuint* ShaderProgram, const char* pShaderText, GLenum ShaderType){
     GLuint ShaderObj = glCreateShader(ShaderType);
 
     if(ShaderObj == 0){
@@ -44,6 +44,7 @@ void Shader::AddShader(GLuint* ShaderProgram, const char* pShaderText, GLenum Sh
     }
 
     glAttachShader(*ShaderProgram, ShaderObj);
+    return &ShaderObj;
 }
 
 GLuint Shader::CompileShaders(int ID){
@@ -52,7 +53,7 @@ GLuint Shader::CompileShaders(int ID){
     std::string VertexShaderLocation = GameObjectsLocation + IDAsStringStream.str() + "/vertex.vs";
     std::string FractureShaderLocation = GameObjectsLocation + IDAsStringStream.str() + "/fracture.fs";
 
-    GLuint ShaderProgram = glCreateProgram();
+    ShaderProgram = glCreateProgram();
 
     if(ShaderProgram == 0){
         std::cout << stderr << " Error creating shader program" << std::endl;
@@ -71,8 +72,8 @@ GLuint Shader::CompileShaders(int ID){
         exit(1);
     }
 
-    AddShader(&ShaderProgram, vs.c_str(), GL_VERTEX_SHADER);
-    AddShader(&ShaderProgram, fs.c_str(), GL_FRAGMENT_SHADER);
+    GLuint* VertexShader = AddShader(&ShaderProgram, vs.c_str(), GL_VERTEX_SHADER);
+    GLuint* FractureShader =AddShader(&ShaderProgram, fs.c_str(), GL_FRAGMENT_SHADER);
 
     GLint Success = 0;
     GLchar ErrorLog[1024] = {0};
@@ -92,6 +93,7 @@ GLuint Shader::CompileShaders(int ID){
         exit(1);
     }
 
+    glDeleteShader(*VertexShader);
+    glDeleteShader(*FractureShader);
     std::cout << "Successfully compiled shaders for Game Object " << ID << std::endl;
-    return ShaderProgram;
 }

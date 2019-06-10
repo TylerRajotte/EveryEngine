@@ -7,8 +7,8 @@ class WindowManager{
     public:
         void InitSDL(const char* Name, int xpos, int ypos, int width, int height, bool enableVsync);
         void InitGlew();
-        void CreateVertexBuffer();
-        void RenderScene();
+        void CleanScreen();
+        void SwapWindow();
         void CleanupSDL();
 
     private:

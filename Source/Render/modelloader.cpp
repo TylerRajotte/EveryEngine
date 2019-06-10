@@ -43,7 +43,7 @@ bool ModelLoader::OpenModel(int ID){
                     for(int i = 0; i < 2; i++){
                         Vertices.push_back(FormatedVert[i]);
                     }
-                    std::cout << "Loaded Vertex - " << FormatedVert[0] << " " << FormatedVert[1] << " " << FormatedVert[2] << std::endl;
+                    // std::cout << "Loaded Vertex - " << FormatedVert[0] << " " << FormatedVert[1] << " " << FormatedVert[2] << std::endl;
                     break;
                 }
                 case 'f': {
@@ -52,7 +52,7 @@ bool ModelLoader::OpenModel(int ID){
                     for(int i = 0; i < 2; i++){
                         Indices.push_back(int(FormatedIndices[i]));
                     }
-                    std::cout << "Loaded Indice - " << FormatedIndices[0] << " " << FormatedIndices[1] << " " << FormatedIndices[2] << " "<< std::endl;
+                    // std::cout << "Loaded Indice - " << FormatedIndices[0] << " " << FormatedIndices[1] << " " << FormatedIndices[2] << " "<< std::endl;
                 }
                 default: {
                     // Something else doesn't matter though
