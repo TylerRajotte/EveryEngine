@@ -52,6 +52,8 @@ bool GameObject::Init(int NewID, std::string NewName, int NewPos[3], int NewScal
     glBindBuffer(GL_ARRAY_BUFFER, 0); 
     glBindVertexArray(0);
 
+    std::cout << "Created VBO, EBO and VAO for Game Object - " << ID << std::endl;
+
     return true;    
 }
 

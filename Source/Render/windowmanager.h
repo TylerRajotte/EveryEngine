@@ -10,9 +10,10 @@ class WindowManager{
         void CleanScreen();
         void SwapWindow();
         void CleanupSDL();
+        SDL_Window* MainWindow;
 
     private:
-        SDL_Window* MainWindow;
+        // Temp SDL_Window* MainWindow;
         SDL_GLContext MainContext;
         GLuint VBO;
 };

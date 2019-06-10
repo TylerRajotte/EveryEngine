@@ -73,7 +73,7 @@ int main(int argc, char** argv){
     windowmanager->InitSDL("EveryEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, false);
     windowmanager->InitGlew();
 
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClearColor(0.0f, 1.0f, 0.0f, 0.0f);
 
     int data[3] = {0,0,0};
 
@@ -82,9 +82,11 @@ int main(int argc, char** argv){
     bool running = true;
     while(running){
         event->EventPoll(&running);
-        windowmanager->CleanScreen();
+        //windowmanager->CleanScreen();
+        glClear(GL_COLOR_BUFFER_BIT);
         triangle->RenderObject();
-        windowmanager->SwapWindow();
+        //windowmanager->SwapWindow();
+        SDL_GL_SwapWindow(windowmanager->MainWindow);
     }
     windowmanager->CleanupSDL();
 
