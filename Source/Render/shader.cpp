@@ -47,7 +47,7 @@ GLuint* Shader::AddShader(GLuint* ShaderProgram, const char* pShaderText, GLenum
     return &ShaderObj;
 }
 
-GLuint Shader::CompileShaders(int ID){
+bool Shader::CompileShaders(int ID){
     std::stringstream IDAsStringStream;
     IDAsStringStream << ID;
     std::string VertexShaderLocation = GameObjectsLocation + IDAsStringStream.str() + "/vertex.vs";
@@ -57,23 +57,23 @@ GLuint Shader::CompileShaders(int ID){
 
     if(ShaderProgram == 0){
         std::cout << stderr << " Error creating shader program" << std::endl;
-        exit(0);
+        return false;
     }
 
     std::string vs, fs;
 
     if(!ReadFile(VertexShaderLocation, vs)){
         std::cout << stderr << " Error Reading Vertex Shader File" << std::endl;
-        exit(1);
+        return false;
     }
 
     if(!ReadFile(FractureShaderLocation, fs)){
         std::cout << " Error Reading Fragment Shader File" << std::endl;
-        exit(1);
+        return false;
     }
 
     GLuint* VertexShader = AddShader(&ShaderProgram, vs.c_str(), GL_VERTEX_SHADER);
-    GLuint* FractureShader =AddShader(&ShaderProgram, fs.c_str(), GL_FRAGMENT_SHADER);
+    GLuint* FractureShader = AddShader(&ShaderProgram, fs.c_str(), GL_FRAGMENT_SHADER);
 
     GLint Success = 0;
     GLchar ErrorLog[1024] = {0};
@@ -82,7 +82,7 @@ GLuint Shader::CompileShaders(int ID){
     if(Success == 0){
         glGetProgramInfoLog(ShaderProgram, sizeof(ErrorLog), NULL, ErrorLog);
         std::cout << stderr << "Error linking shader program: " << ErrorLog << std::endl;
-        exit(1);
+        return false;
     }
 
     glValidateProgram(ShaderProgram);
@@ -90,10 +90,10 @@ GLuint Shader::CompileShaders(int ID){
     if(!Success){
         glGetProgramInfoLog(ShaderProgram, sizeof(ErrorLog), NULL, ErrorLog);
         std::cout << stderr << "Invalid shader program: " << ErrorLog << std::endl;
-        exit(1);
+        return false;
     }
 
     glDeleteShader(*VertexShader);
     glDeleteShader(*FractureShader);
-    std::cout << "Successfully compiled shaders for Game Object " << ID << std::endl;
+    return true;
 }

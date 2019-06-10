@@ -1,6 +1,8 @@
 #ifndef GameObject_H
 #define GameObject_H
 #include "dependancies.h"
+#include "Render/shader.h"
+#include "Render/modelloader.h"
 
 class GameObject{
     public:

@@ -1,6 +1,4 @@
 #include "gameobject.h"
-#include "Render/modelloader.h"
-#include "Render/shader.h"
 
 bool GameObject::Init(int NewID, std::string NewName, int NewPos[3], int NewScale[3], int NewRotation[3], int NewRotationOrigin[3]){
     // Basic input for the freshly created gameobject
@@ -24,7 +22,11 @@ bool GameObject::Init(int NewID, std::string NewName, int NewPos[3], int NewScal
 
     // Start New shader
     shader = new Shader;
-    shader->CompileShaders(ID);
+    if(shader->CompileShaders(ID)){
+        std::cout << "Compiled shaders for Game Object " << ID << std::endl;
+    } else {
+        return false;
+    }
 
     // Generate Buffers
     glGenVertexArrays(1, &VAO);
