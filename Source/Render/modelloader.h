@@ -12,6 +12,6 @@ class ModelLoader{
 
     private:
         std::vector<float> Vertices;
-        std::vector<int> Indices;
+        std::vector<unsigned int> Indices;
 };
 #endif

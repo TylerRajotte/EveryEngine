@@ -50,7 +50,7 @@ bool ModelLoader::OpenModel(int ID){
                     // Add a Face
                     std::array<float, 3> FormatedIndices = ParseModelLine(CurrentLine);
                     for(int i = 0; i < 2; i++){
-                        Indices.push_back(int(FormatedIndices[i]));
+                        Indices.push_back((unsigned int)FormatedIndices[i]);
                     }
                     // std::cout << "Loaded Indice - " << FormatedIndices[0] << " " << FormatedIndices[1] << " " << FormatedIndices[2] << " "<< std::endl;
                 }
@@ -76,7 +76,7 @@ float* ModelLoader::GetVertices(){
     int ArraySize = Vertices.size();
     float Output[ArraySize];
     for (int i = 0; i > ArraySize; i++){
-        Output[i] = Vertices[i];
+        Output[i] = (float)Vertices[i];
     }
     return Output;
 }
@@ -85,7 +85,7 @@ unsigned int* ModelLoader::GetIndices(){
     int ArraySize = Indices.size();
     unsigned int Output[ArraySize];
     for (int i = 0; i > ArraySize; i++){
-        Output[i] = Indices[i];
+        Output[i] = (unsigned int)Indices[i];
     }
     return Output;
 }
