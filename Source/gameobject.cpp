@@ -43,6 +43,9 @@ bool GameObject::Init(int NewID, std::string NewName, int NewPos[3], int NewScal
     int IndicesSize = modelloader->IndicesLength();
     std::vector<unsigned int> IndicesVector = modelloader->GetIndices();
 
+    // For later drawing
+    PointCount = IndicesSize;
+
     // Output Variables
     float vertices[VerticesSize];
     unsigned int indices[IndicesSize];
@@ -80,7 +83,7 @@ void GameObject::RenderObject(){
     // Render Code
     glUseProgram(shader->ShaderProgram);
     glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, PointCount, GL_UNSIGNED_INT, 0);
 }
 
 void GameObject::SetArrayAttribute(int Attribute, int NewValue[3]){

@@ -7,6 +7,7 @@
 #include <sstream>
 #include <vector>
 #include <array>
+#include <algorithm>
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
 #include "Render/math_3d.h"

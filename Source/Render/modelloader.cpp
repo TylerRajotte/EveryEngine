@@ -73,7 +73,24 @@ bool ModelLoader::OpenModel(int ID){
 }
 
 std::vector<float> ModelLoader::GetVertices(){
-    return Vertices;
+    std::vector<float> OutputVertices;
+    float BiggestVert = *std::max_element(Vertices.begin(), Vertices.end());
+    float SmallestVert = *std::min_element(Vertices.begin(), Vertices.end());
+
+    for(int i = 0; i < Vertices.size(); i++){
+        if(Vertices.at(i) > 0){
+            // Positive Number
+            OutputVertices.push_back(Vertices.at(i) / BiggestVert); 
+        } else if (Vertices.at(i) == 0) {
+            // Zero
+            OutputVertices.push_back(Vertices.at(i));
+        } else {
+            // Negative
+            OutputVertices.push_back((Vertices.at(i) / SmallestVert) * -1);
+        }
+    }
+
+    return OutputVertices;
 }
 
 std::vector<unsigned int> ModelLoader::GetIndices(){

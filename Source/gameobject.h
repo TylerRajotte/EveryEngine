@@ -32,6 +32,8 @@ class GameObject{
         unsigned int EBO;
         unsigned int VAO;
 
+        int PointCount;
+
         Shader* shader = nullptr;
 };
 
