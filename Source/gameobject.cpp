@@ -36,30 +36,32 @@ bool GameObject::Init(int NewID, std::string NewName, int NewPos[3], int NewScal
     // Bind VAO
     glBindVertexArray(VAO);
 
-    float vertices[] = {
-         0.5f,  0.5f, 0.0f,  // top right
-         0.5f, -0.5f, 0.0f,  // bottom right
-        -0.5f, -0.5f, 0.0f,  // bottom left
-        -0.5f,  0.5f, 0.0f   // top left 
-    };
+    // Inital raw data
+    int VerticesSize = modelloader->VerticesLength();
+    std::vector<float> VerticesVector = modelloader->GetVertices();
 
-    unsigned int indices[] = {  // note that we start from 0!
-        0, 1, 3,  // first Triangle
-        1, 2, 3   // second Triangle
-    };
+    int IndicesSize = modelloader->IndicesLength();
+    std::vector<unsigned int> IndicesVector = modelloader->GetIndices();
 
-    //float* vertices = modelloader->GetVertices();
-    //unsigned int* indices = modelloader->GetIndices();
+    // Output Variables
+    float vertices[VerticesSize];
+    unsigned int indices[IndicesSize];
+    
+    // Converting from one data type to the next
+    for(int i = 0; i < VerticesSize; i++){
+        vertices[i] = VerticesVector.at(i);
+    }
+    for(int i = 0; i < IndicesSize; i++){
+        indices[i] = IndicesVector.at(i);
+    }
 
     // Setup the VBO
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    // glBufferData(GL_ARRAY_BUFFER, sizeof(*vertices), vertices, GL_STATIC_DRAW);
 
     // Setup the EBO
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-    //glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(*indices), indices, GL_STATIC_DRAW);
 
     // Set Vertex Pointer atrributes
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);

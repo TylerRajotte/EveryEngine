@@ -90,7 +90,7 @@ bool Shader::CompileShaders(int ID){
         return false;
     }
     if(AddShader(&ShaderProgram, fs.c_str(), GL_FRAGMENT_SHADER, &FractureShaderObject)){
-        std::cout << "Successfully added Vertex shader" << std::endl;
+        std::cout << "Successfully added Fragment shader" << std::endl;
     } else {
         std::cout << stderr << " Error Adding Fragment shader" << std::endl;
         return false;

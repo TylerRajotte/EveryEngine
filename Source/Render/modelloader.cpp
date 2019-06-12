@@ -40,8 +40,8 @@ bool ModelLoader::OpenModel(int ID){
                 case 'v': {
                     // Add a vert
                     std::array<float, 3> FormatedVert = ParseModelLine(CurrentLine);
-                    for(int i = 0; i < 2; i++){
-                        Vertices.push_back(FormatedVert[i]);
+                    for(int i = 0; i < 3; i++){
+                        Vertices.push_back((float)FormatedVert[i]);
                     }
                     // std::cout << "Loaded Vertex - " << FormatedVert[0] << " " << FormatedVert[1] << " " << FormatedVert[2] << std::endl;
                     break;
@@ -49,7 +49,7 @@ bool ModelLoader::OpenModel(int ID){
                 case 'f': {
                     // Add a Face
                     std::array<float, 3> FormatedIndices = ParseModelLine(CurrentLine);
-                    for(int i = 0; i < 2; i++){
+                    for(int i = 0; i < 3; i++){
                         Indices.push_back((unsigned int)FormatedIndices[i]);
                     }
                     // std::cout << "Loaded Indice - " << FormatedIndices[0] << " " << FormatedIndices[1] << " " << FormatedIndices[2] << " "<< std::endl;
@@ -72,20 +72,18 @@ bool ModelLoader::OpenModel(int ID){
     return true;
 }
 
-float* ModelLoader::GetVertices(){
-    int ArraySize = Vertices.size();
-    float Output[ArraySize];
-    for (int i = 0; i > ArraySize; i++){
-        Output[i] = (float)Vertices[i];
-    }
-    return Output;
+std::vector<float> ModelLoader::GetVertices(){
+    return Vertices;
 }
 
-unsigned int* ModelLoader::GetIndices(){
-    int ArraySize = Indices.size();
-    unsigned int Output[ArraySize];
-    for (int i = 0; i > ArraySize; i++){
-        Output[i] = (unsigned int)Indices[i];
-    }
-    return Output;
+std::vector<unsigned int> ModelLoader::GetIndices(){
+    return Indices;
+}
+
+int ModelLoader::VerticesLength(){
+    return Vertices.size();
+}
+
+int ModelLoader::IndicesLength(){
+    return Indices.size();
 }
