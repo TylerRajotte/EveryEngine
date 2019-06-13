@@ -80,13 +80,13 @@ std::vector<float> ModelLoader::GetVertices(){
     for(int i = 0; i < Vertices.size(); i++){
         if(Vertices.at(i) > 0){
             // Positive Number
-            OutputVertices.push_back(Vertices.at(i) / BiggestVert); 
+            OutputVertices.push_back(Vertices.at(i)); // BiggestVert); 
         } else if (Vertices.at(i) == 0) {
             // Zero
             OutputVertices.push_back(Vertices.at(i));
         } else {
             // Negative
-            OutputVertices.push_back((Vertices.at(i) / SmallestVert) * -1);
+            OutputVertices.push_back(Vertices.at(i)); // SmallestVert) * -1);
         }
     }
 

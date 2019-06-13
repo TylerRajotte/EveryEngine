@@ -6,7 +6,7 @@
 
 class GameObject{
     public:
-        bool Init(int NewID, std::string NewName, int NewPos[3], int NewScale[3], int NewRotation[3], int NewRotationOrigin[3]);
+        bool Init(int NewID);
         void RenderObject();
         // This function would then later be called by the object manager
         void Update();
@@ -17,7 +17,6 @@ class GameObject{
         void SetName(std::string NewName);
         std::string GetName();
 
-        void SetID(int NewId);
         int GetID();
 
     private:

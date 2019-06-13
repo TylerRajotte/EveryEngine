@@ -1,17 +1,17 @@
 #ifndef Dependancies_H
 #define Dependancies_H
 
-#include <iostream>
-#include <fstream>
-#include <string.h>
-#include <sstream>
-#include <vector>
-#include <array>
-#include <algorithm>
+#include <iostream> // Cout
+#include <fstream> // FileIO
+#include <string.h> // Strings
+#include <sstream> // Convert string to floats in modelloader
+#include <vector> // When c arrays give you a headack
+#include <array> // When c arrays give you a headack part 2 (I think they might be faster/efficent)
+#include <algorithm> // Find the smallest and bigest values 
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
-#include "Render/math_3d.h"
 
+// For specificing attributes without having to know the codes
 const int GO_POS = 0;
 const int GO_SCALE = 1;
 const int GO_ROTATION = 2;

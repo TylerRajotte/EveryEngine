@@ -1,15 +1,8 @@
 #include "gameobject.h"
 
-bool GameObject::Init(int NewID, std::string NewName, int NewPos[3], int NewScale[3], int NewRotation[3], int NewRotationOrigin[3]){
+bool GameObject::Init(int NewID){
     // Basic input for the freshly created gameobject
     ID = NewID;
-    Name = NewName;
-    for(int i = 0; i < 3; i++){
-        Pos[i] = NewPos[i];
-        Scale[i] = NewScale[i];
-        Rotation[i] = NewRotation[i];
-        RotationOrigin[i] = NewRotationOrigin[i];
-    }
 
     // Load the model
     ModelLoader* modelloader = nullptr;
@@ -53,9 +46,11 @@ bool GameObject::Init(int NewID, std::string NewName, int NewPos[3], int NewScal
     // Converting from one data type to the next
     for(int i = 0; i < VerticesSize; i++){
         vertices[i] = VerticesVector.at(i);
+        // std::cout << "Verts - " << VerticesVector.at(i) << std::endl;
     }
     for(int i = 0; i < IndicesSize; i++){
         indices[i] = IndicesVector.at(i);
+        // std::cout << "Indices - " << IndicesVector.at(i) << std::endl;
     }
 
     // Setup the VBO
@@ -149,9 +144,6 @@ std::string GameObject::GetName(){
     return Name;
 }
 
-void GameObject::SetID(int NewId){
-    ID = NewId;
-}
 int GameObject::GetID(){
     return ID;
 }

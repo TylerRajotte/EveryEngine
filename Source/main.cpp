@@ -75,18 +75,31 @@ int main(int argc, char** argv){
 
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-    int data[3] = {0,0,0};
+    triangle->Init(0);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    triangle->Init(0, "Triangle", data, data, data, data);
+    // Restrict framerate
+    const int FPS = 60;
+    const int FrameDelay = 1000/FPS;
 
+    Uint32 FrameStart;
+    int FrameTime;
+
+    // Controls if the game is actually running
     bool running = true;
     while(running){
+        FrameStart = SDL_GetTicks();
+
         event->EventPoll(&running);
-        //windowmanager->CleanScreen();
-        glClear(GL_COLOR_BUFFER_BIT);
+        windowmanager->CleanScreen();
         triangle->RenderObject();
-        //windowmanager->SwapWindow();
-        SDL_GL_SwapWindow(windowmanager->MainWindow);
+        windowmanager->SwapWindow();
+
+        // Change framerate if its running too fast
+        FrameTime = SDL_GetTicks() - FrameStart;
+        if(FrameDelay > FrameTime){
+            SDL_Delay(FrameDelay - FrameTime);
+        }
     }
     windowmanager->CleanupSDL();
 
