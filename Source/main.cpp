@@ -8,8 +8,6 @@
 //      Maybe computer generated terrain
 
 // Todo
-//     I think I should work toward removing the math3d dependancy
-//     Reimplement all the code regarding VBO and add VAO
 //     Revamp the total front end for interacting with the renderer 
 //         Should be as simple as possible working with the front end 
 //         Maybe specify your shaders and model and the renderer takes care of the rest
@@ -20,79 +18,55 @@
 //     
 
 // Maybe work on some form of a Object Manager for keeping track of all the various objects such as 
-// Game Objects and Render Objects or just GameObjects
 
-
-
-// Basic Idea 1:
 //     GameObject
-//          POS(X, Y, Z)
-//          Scale(x, y, z)
-//          Rotation(x, y, z) + Rotation Point (x, y, z)
-//          DisplayName
-//          ID
-//          Action Object (Based on the Action Object) Action Objects should be independant of Gameobject
-//      Render Object
-//          Model
-//          Texture
-//          Fracture Shader
-//          Vertex Shader
-//      Action Object
 //          AI
 //          Sounds
 //          Interactivity
-//
-// Basic Idea 2:
-//     GameObject
-//          POS(X, Y, Z)
-//          Scale(x, y, z)
-//          Rotation(x, y, z) + Rotation Point (x, y, z)
-//          DisplayName
-//          ID
-//          AI
-//          Sounds
-//          Interactivity
-//      Render Object
-//          Model
-//          Texture
-//          Fracture Shader
-//          Vertex Shader
-//
-// GameObjects Should be the building blocks of everything
-//      Houses, Items, Props, Player
 
+// I dont know how nessary these are but I do them anyways
 WindowManager* windowmanager = nullptr;
 Event* event = nullptr;
-GameObject* triangle = nullptr;
+GameObject* testobject = nullptr;
 
 int main(int argc, char** argv){
+    // Starting all the modules
     windowmanager = new WindowManager();
     event = new Event();
-    triangle = new GameObject();
+    testobject = new GameObject();
 
+    // Window manager initalization
     windowmanager->InitSDL("EveryEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, false);
     windowmanager->InitGlew();
 
+    // Black background, don't know where else to put this
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-    triangle->Init(0);
+    // Creating a gameobject
+    testobject->Init(0);
+    // Enable wireframe mode
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    // Restrict framerate
+    // Restrict framerate inital variables
     const int FPS = 60;
     const int FrameDelay = 1000/FPS;
-
     Uint32 FrameStart;
     int FrameTime;
 
     // Controls if the game is actually running
     bool running = true;
+    // The main game loop
     while(running){
         FrameStart = SDL_GetTicks();
 
+        // Check for events
         event->EventPoll(&running);
+
         windowmanager->CleanScreen();
-        triangle->RenderObject();
+
+        // Rendering the game object
+        testobject->RenderObject();
+        
         windowmanager->SwapWindow();
 
         // Change framerate if its running too fast
@@ -101,6 +75,7 @@ int main(int argc, char** argv){
             SDL_Delay(FrameDelay - FrameTime);
         }
     }
+    // SDL has some stuff that needs to be cleaned up at the end
     windowmanager->CleanupSDL();
 
     return 0;

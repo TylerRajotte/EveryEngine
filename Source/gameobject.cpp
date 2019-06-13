@@ -82,6 +82,7 @@ void GameObject::RenderObject(){
 }
 
 void GameObject::SetArrayAttribute(int Attribute, int NewValue[3]){
+    // Specify an attribute and then what you want to change
     switch(Attribute){
         case 0:
             for(int i = 0; i < 3; i++){
@@ -114,6 +115,7 @@ void GameObject::SetArrayAttribute(int Attribute, int NewValue[3]){
 }
 
 int* GameObject::GetArrayAttribute(int Attribute){
+    // Ask for an attribute and get the data back, might be changed out to use vectors
     switch(Attribute){
         case 0:
             return Pos;
@@ -137,6 +139,7 @@ int* GameObject::GetArrayAttribute(int Attribute){
     }
 }
 
+// Change and set names
 void GameObject::SetName(std::string NewName){
     Name = NewName;
 }
@@ -144,6 +147,7 @@ std::string GameObject::GetName(){
     return Name;
 }
 
+// Get the ID 
 int GameObject::GetID(){
     return ID;
 }
