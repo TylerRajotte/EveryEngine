@@ -19,7 +19,9 @@ const int GO_ROTATIONORIGIN = 3;
 const int GO_ID = 4;
 const int GO_NAME = 5;
 
-// Temp setting should eventually use Settings.txt
+// Temp settings that should eventually use Settings.txt
 const std::string GameObjectsLocation = "GameObjects/";
+const int windowXSize = 640;
+const int windowYSize = 480;
 
 #endif

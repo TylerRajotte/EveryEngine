@@ -1,23 +1,22 @@
-// This is a comment in the settings file
-// Comments should also be able to work haveway through a line
-
+// Comments should also be able to work halfway through a line
 // Also the spaces around the equals should be ignored
-// True and False shouldn't be case sensetive
-
-// Settings should be able to go in any order
-
-// The bellow space should be ingored
+// Settings should be able to go in any order (Use a switch statement)
 
 WindowName = "EveryEngine"
 WindowXSize = 640
 WindowYSize = 480
-WindowXpos = CENTERED
-WindowYpos = CENTERED
+WindowXPos = CENTERED
+WindowYPos = CENTERED
 // Above is a statment that can be either a number or a constant 
 
-EnableVSync = False
+EnableVsync = FALSE
 OpenGLShadersLocation = "Shaders/"
 
-SDLOpenGLAttribute = (SDL_GL_DOUBLEBUFFER, 1)
+// SDLOpenGLAttribute = (SDL_GL_DOUBLEBUFFER, 1)
+
+//    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE); // Set OpenGL to newest version
+//    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3); // Set Min and Max Version
+//    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2); 
+//    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1); // Double Buffering with 24bit z buffer set either 1 (Low Performance), 16, 32 (high performance)
 // Above is a reusable setting that can be reused and will add more statements
 

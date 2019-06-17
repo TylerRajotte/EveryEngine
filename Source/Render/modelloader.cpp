@@ -1,5 +1,4 @@
 #include "modelloader.h"
-#include "../dependancies.h"
 
 std::array<float,3> ModelLoader::ParseModelLine(std::string Line){
     // Setup some variables

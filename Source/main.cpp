@@ -2,6 +2,7 @@
 #include "Render/windowmanager.h"
 #include "gameobject.h"
 #include "event.h"
+#include "settingsloader.h"
 
 // General Assumtions
 //      Open World with enough terrain that it will be loaded in and out
@@ -15,10 +16,10 @@
 //     Above advocates for a really abstracted front end/functions to work with things 
 //     I Also like the idea of using small programs like the vertex shader to controll functionality like sound or behaviour
 //     Settings File Functionality and actually making it work
+//     Add error handing to windowmanager or create a better error handing system as a whole
 //     
 
 // Maybe work on some form of a Object Manager for keeping track of all the various objects such as 
-
 //     GameObject
 //          AI
 //          Sounds
@@ -28,12 +29,17 @@
 WindowManager* windowmanager = nullptr;
 Event* event = nullptr;
 GameObject* testobject = nullptr;
+SettingsLoader* settingsloader = nullptr;
 
 int main(int argc, char** argv){
     // Starting all the modules
     windowmanager = new WindowManager();
     event = new Event();
     testobject = new GameObject();
+    settingsloader = new SettingsLoader();
+
+    // Load Settings from settings.txt
+    //settingsloader->LoadSettings("settings.txt");
 
     // Window manager initalization
     windowmanager->InitSDL("EveryEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, false);
