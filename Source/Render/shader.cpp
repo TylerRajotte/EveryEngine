@@ -107,6 +107,7 @@ bool Shader::CompileShaders(int ID){
         return false;
     }
 
+    // Make sure everything is good
     glValidateProgram(ShaderProgram);
     glGetProgramiv(ShaderProgram, GL_VALIDATE_STATUS, &Success);
     if(!Success){
