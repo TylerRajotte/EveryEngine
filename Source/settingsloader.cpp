@@ -1,17 +1,5 @@
 #include "settingsloader.h"
 
-// std::vector<std::string> split(std::string strToSplit, char delimeter)
-// {
-//     std::stringstream ss(strToSplit);
-//     std::string item;
-//     std::vector<std::string> splittedStrings;
-//     while (std::getline(ss, item, delimeter))
-//     {
-//        splittedStrings.push_back(item);
-//     }
-//     return splittedStrings;
-// }
-
 bool SettingsLoader::LoadSettings(std::string Location){
     // Open File
     std::ifstream SettingsFile(Location.c_str());
@@ -30,6 +18,7 @@ bool SettingsLoader::LoadSettings(std::string Location){
                 // Should only have good data by now
                 std::stringstream LineStream(Line);
                 std::string Section;
+                std::vector<std::string> BrokenLine; 
 
                 // Delimit around = 
                 while(getline(LineStream, Section, '=')){
@@ -42,8 +31,42 @@ bool SettingsLoader::LoadSettings(std::string Location){
                     } else {
                         CleanedSection = Section;
                     }
-                    
-                    std::cout << CleanedSection << std::endl;
+                    BrokenLine.push_back(CleanedSection);
+                }
+                // All these if statements hurt my soul but this pretty much the only way
+                if(BrokenLine[0] == "WindowName"){
+                    WindowName = BrokenLine[1];
+                } else if (BrokenLine[0] == "WindowXSize"){
+                    WindowXSize = std::stoi(BrokenLine[1]);
+                } else if (BrokenLine[0] == "WindowYSize"){
+                    WindowYSize = std::stoi(BrokenLine[1]);
+                } else if (BrokenLine[0] == "WindowXPos"){
+                    // Check for special centered else just use the number
+                    if (BrokenLine[1] == "CENTERED"){
+                        WindowXPos = SDL_WINDOWPOS_CENTERED;
+                    } else {
+                        WindowXPos = std::stoi(BrokenLine[1]);
+                    }
+                } else if (BrokenLine[0] == "WindowYPos"){
+                    // Check for special centered else just use the number
+                    if (BrokenLine[1] == "CENTERED"){
+                        WindowYPos = SDL_WINDOWPOS_CENTERED;
+                    } else {
+                        WindowYPos = std::stoi(BrokenLine[1]);
+                    }
+                } else if (BrokenLine[0] == "EnableVsync"){
+                    // Enable bool support in the text file
+                    if (BrokenLine[1] == "TRUE"){
+                        EnableVsync = true;
+                    } else if (BrokenLine[1] == "FALSE") {
+                        EnableVsync = false;
+                    } else {
+                        std::cout << stderr << " Error: Invalid Vsync settting" << std::endl;
+                        return false;
+                    }
+                } else {
+                    std::cout << stderr << " Error: Invalid setting specified" << std::endl;
+                    return false;
                 }
             }
         }

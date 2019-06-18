@@ -2,7 +2,7 @@
 // Also the spaces around the equals should be ignored
 // Settings should be able to go in any order (Use a switch statement)
 
-WindowName = "EveryEngine"
+WindowName = EveryEngine
 WindowXSize = 640
 WindowYSize = 480
 WindowXPos = CENTERED
@@ -10,7 +10,7 @@ WindowYPos = CENTERED
 // Above is a statment that can be either a number or a constant 
 
 EnableVsync = FALSE
-OpenGLShadersLocation = "Shaders/"
+// OpenGLShadersLocation = Shaders/
 
 // SDLOpenGLAttribute = (SDL_GL_DOUBLEBUFFER, 1)
 

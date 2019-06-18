@@ -39,10 +39,16 @@ int main(int argc, char** argv){
     settingsloader = new SettingsLoader();
 
     // Load Settings from settings.txt
-    //settingsloader->LoadSettings("settings.txt");
+    settingsloader->LoadSettings("settings.txt");
 
     // Window manager initalization
-    windowmanager->InitSDL("EveryEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, false);
+    windowmanager->InitSDL(settingsloader->WindowName.c_str(),
+                           settingsloader->WindowXPos,
+                           settingsloader->WindowYPos, 
+                           settingsloader->WindowXSize, 
+                           settingsloader->WindowYSize, 
+                           settingsloader->EnableVsync);
+    
     windowmanager->InitGlew();
 
     // Black background, don't know where else to put this
