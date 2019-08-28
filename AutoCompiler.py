@@ -32,6 +32,7 @@ except OSError:
     print("Could not clean old compiled code")
 outputname = outputname + "-" + str(currentbuildcount)
 
+print("Looking for source code files to compile")
 # New Walk powered source code finder
 filestocompile = ""
 for root, dirs, files in os.walk(sourceCodeDirectory, topdown=False):
@@ -48,6 +49,7 @@ for root, dirs, files in os.walk(sourceCodeDirectory, topdown=False):
 # print("{} {}{} {} -o {}".format(compiler, filestocompile, flags, linkerflags, outputname))
 # print("./" + outputname)
 
+print("Compiling source code")
 os.system("{} {}{} {} -o {}".format(compiler, filestocompile, flags, linkerflags, outputname))
 if runAfterCompile:
     os.system("./" + outputname)
