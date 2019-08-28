@@ -18,8 +18,9 @@ void WindowManager::InitSDL(const char* name, int xpos, int ypos, int width, int
     MainContext = SDL_GL_CreateContext(MainWindow);
 
     // Basic Opengl attribute flags
+    // Should probably be moved to settings file or something
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE); // Set OpenGL to newest version
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3); // Set Min and Max Version
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3); // Not min/max instead whats around the decimal
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2); 
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1); // Double Buffering with 24bit z buffer set either 1 (Low Performance), 16, 32 (high performance)
 

@@ -9,6 +9,10 @@
 //      Maybe computer generated terrain
 
 // Todo
+//     Add the ablity to add and link as many shaders as you want
+//     Maybe I should create a material libarary for shaders
+//     Or ideally you would be able to specify the details of the shader outside the shader itself
+//
 //     Revamp the total front end for interacting with the renderer 
 //         Should be as simple as possible working with the front end 
 //         Maybe specify your shaders and model and the renderer takes care of the rest
@@ -57,7 +61,7 @@ int main(int argc, char** argv){
     // Creating a gameobject
     testobject->Init(0);
     // Enable wireframe mode
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     // Restrict framerate inital variables
     const int FPS = 60;
